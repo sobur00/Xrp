@@ -43,8 +43,8 @@ history = deque(maxlen=60)
 last_signal = "HOLD"
 
 # Track signal history over time for percentage breakdown
-# 30s per cycle, 3 hours = 360 readings
-SIGNAL_WINDOW = 360
+# 45s per cycle, 3 hours = 240 readings
+SIGNAL_WINDOW = 240
 signal_history = deque(maxlen=SIGNAL_WINDOW)
 
 # Interactive state
@@ -62,7 +62,7 @@ def signal_percentages():
     buy_pct = (signal_history.count("BUY") / total) * 100
     sell_pct = (signal_history.count("SELL") / total) * 100
     hold_pct = (signal_history.count("HOLD") / total) * 100
-    hours_covered = (total * 30) / 3600
+    hours_covered = (total * 45) / 3600
     return buy_pct, sell_pct, hold_pct, hours_covered
 
 
@@ -292,4 +292,4 @@ while True:
     except Exception as e:
         print("Error: " + str(e), flush=True)
 
-    time.sleep(30)
+    time.sleep(45)
